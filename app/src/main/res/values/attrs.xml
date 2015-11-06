@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MovingButton">
+        <attr name="mb_move_direction">
+            <enum name="all" value="0" />
+            <enum name="horizontal_vertical" value="1" />
+            <enum name="horizontal" value="2" />
+            <enum name="vertical" value="3" />
+            <enum name="still" value="4" />
+        </attr>
+        <attr name="mb_movement" format="dimension" />
+        <attr name="mb_movement_left" format="dimension" />
+        <attr name="mb_movement_right" format="dimension" />
+        <attr name="mb_movement_top" format="dimension" />
+        <attr name="mb_movement_bottom" format="dimension" />
+        <attr name="mb_offset_inner" format="dimension" />
+        <attr name="mb_offset_outer" format="dimension" />
+        <attr name="mb_vibration_duration" format="integer" />
+        <attr name="mb_event_volume" format="integer" />
+    </declare-styleable>
+</resources>
