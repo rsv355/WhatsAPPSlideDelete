@@ -107,13 +107,16 @@ public class MainActivity extends AppCompatActivity {
 
                 case MotionEvent.ACTION_UP:
                     isMoving = false;
-
                     txtCancel.setVisibility(View.INVISIBLE);
                     reset();
 
                     break;
 
                 case MotionEvent.ACTION_DOWN:
+
+                 //   Animation fadeIN = AnimationUtils.loadAnimation(MainActivity.this,R.anim.fadein);
+                //    imgMicrophone.startAnimation(fadeIN);
+
                     isMoving = true;
                     txtCancel.setVisibility(View.VISIBLE);
                     txt.setText("");
@@ -148,6 +151,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private void reset() {
+
+           // Animation fadeIN = AnimationUtils.loadAnimation(MainActivity.this,R.anim.fadeout);
+          //  imgMicrophone.startAnimation(fadeIN);
 
             txt.setText("type a message");
             imgMicrophone.setX(windowwidth - imgMicrophone.getWidth() - 10);
@@ -215,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
                                 Animation ai = AnimationUtils.loadAnimation(MainActivity.this,R.anim.push_down_out);
                                 imgTrash.startAnimation(ai);
 
-                                new CountDownTimer(300,300){
+                                new CountDownTimer(200,200){
 
                                     @Override
                                     public void onTick(long millisUntilFinished) {
