@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WhatsAPPSlideDelete</string>
+    <integer name="duration_animation">350</integer>
 </resources>

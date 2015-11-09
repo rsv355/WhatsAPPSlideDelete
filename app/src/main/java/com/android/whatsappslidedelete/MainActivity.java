@@ -3,12 +3,15 @@ package com.android.whatsappslidedelete;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,7 +20,7 @@ import enums.ButtonPosition;
 import enums.MoveDirection;
 
 public class MainActivity extends AppCompatActivity {
-    private ImageView imgMicrophone,imgMic;
+    private ImageView imgMicrophone,imgMic,imgSmile,imgTrash;
     private RelativeLayout linear;
 
     MoveDirection moveDirection;
@@ -71,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean isMoving = false;
 
     private void init(){
+
+        imgSmile = (ImageView)findViewById(R.id.imgSmile);
+        imgTrash = (ImageView)findViewById(R.id.imgTrash);
+
         imgMicrophone = (ImageView)findViewById(R.id.imgMicrophone);
         imgMic = (ImageView)findViewById(R.id.imgMic);
        // initialX = imgMicrophone.getX();
@@ -152,6 +159,10 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void startDeleteAnimation(){
+        imgMic.setVisibility(View.VISIBLE);
+
+        imgSmile.setVisibility(View.GONE);
+
         ObjectAnimator animation = ObjectAnimator.ofFloat(imgMic, "y", windowheight-630);
         ObjectAnimator animation2 = ObjectAnimator.ofFloat(imgMic, "rotation", 0.0f, 360f);
         final ObjectAnimator animation3 = ObjectAnimator.ofFloat(imgMic, "y", windowheight-265);
@@ -171,8 +182,72 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animator animation) {
+                imgTrash.setVisibility(View.VISIBLE);
+
+                Animation ai = AnimationUtils.loadAnimation(MainActivity.this,R.anim.push_up_in);
+                imgTrash.startAnimation(ai);
+
+
 
                 animation3.start();
+                animation3.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+
+                        imgMic.setVisibility(View.GONE);
+
+                        new CountDownTimer(500,500){
+
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+
+                            }
+
+                            @Override
+                            public void onFinish() {
+
+                                Animation ai = AnimationUtils.loadAnimation(MainActivity.this,R.anim.push_down_out);
+                                imgTrash.startAnimation(ai);
+
+                                new CountDownTimer(300,300){
+
+                                    @Override
+                                    public void onTick(long millisUntilFinished) {
+
+                                    }
+
+                                    @Override
+                                    public void onFinish() {
+                                        imgTrash.setVisibility(View.GONE);
+                                        imgSmile.setVisibility(View.VISIBLE);
+                                        Animation in = AnimationUtils.loadAnimation(MainActivity.this, android.R.anim.fade_in);
+                                        imgSmile.startAnimation(in);
+                                    }
+                                }.start();
+
+
+                            }
+                        }.start();
+
+
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
             }
 
             @Override
