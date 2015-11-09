@@ -152,8 +152,8 @@ public class MainActivity extends AppCompatActivity {
 
         private void reset() {
 
-           // Animation fadeIN = AnimationUtils.loadAnimation(MainActivity.this,R.anim.fadeout);
-          //  imgMicrophone.startAnimation(fadeIN);
+            Animation fadeIN = AnimationUtils.loadAnimation(MainActivity.this,R.anim.fadeout);
+            imgMicrophone.startAnimation(fadeIN);
 
             txt.setText("type a message");
             imgMicrophone.setX(windowwidth - imgMicrophone.getWidth() - 10);
